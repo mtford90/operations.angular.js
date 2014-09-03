@@ -1,6 +1,6 @@
 {
   "name": "operations-angular",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "angular": "~1.2",
     "operations": "0.1.3"
