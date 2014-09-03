@@ -1,4 +1,4 @@
-angular.module('test', [])
+angular.module('operations', [])
 
     // Wrap in safe callbacks.
     .factory('wrap', function ($rootScope) {
@@ -9,7 +9,6 @@ angular.module('test', [])
          * or asynchronous depending on
          */
         function safeApply() {
-            console.log('do');
             $rootScope.$$phase || $rootScope.$apply();
         }
 
@@ -104,10 +103,8 @@ angular.module('test', [])
         return AngularOperationQueue;
     })
 
-
     .factory('OperationLogging', function () {
         return op.Logger;
     })
-
 
 ;

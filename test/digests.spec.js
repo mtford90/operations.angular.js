@@ -18,7 +18,7 @@ describe('digests', function () {
     }
 
     beforeEach(function () {
-        module('test');
+        module('operations');
         inject(function (_Operation_, _OperationQueue_, _OperationLogging_, _$rootScope_, _$timeout_) {
             Operation = _Operation_;
             OperationQueue = _OperationQueue_;
@@ -36,7 +36,7 @@ describe('digests', function () {
                 assertDigestOccurs(done);
             };
             op.start();
-        }); 
+        });
 
         it('should digest on completion event', function (done) {
             var op = new Operation();
