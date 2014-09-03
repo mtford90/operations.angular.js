@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/mtford90/operations.angular.js",
   "dependencies": {
-    "operations": "~0.1.1"
+    "operations": "~0.1.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
