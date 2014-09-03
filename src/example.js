@@ -25,6 +25,7 @@ angular.module('myModule', ['operations'])
             logOperation: function () {
                 return new Operation('My Logger Operation', function (done) {
                     console.log('Finished!');
+                    done();
                 });
             }
         }

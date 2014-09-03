@@ -13,17 +13,17 @@ angular.module('myModule', ['operations'])
 	.factory('myQueue', function (OperationQueue) {
 		// Max 2 concurrent operations.
 		return new OperationQueue('My Awesome Queue', 2); 
-	}
+	})
 	
 	.factory('MyOperationsService', function (Operation) {
 		return {
 			uselessOperation: function () {
-				return new Operation('My Awesome Operation', function (done) {
+				return new Operation('My Useless Operation', function (done) {
 					var finished = false;
 					var self = this;
 					var interval = setInterval(function () {
 						if (self.cancelled || finished) {
-							clearInterval(token);
+							clearInterval(interval);
 							if (finished) done();
 						}
 					}, 10);
@@ -35,6 +35,7 @@ angular.module('myModule', ['operations'])
 			logOperation: function () {
 				return new Operation('My Logger Operation', function (done) {
 					console.log('Finished!');
+					done();
 				});
 			}
 		}
@@ -53,5 +54,6 @@ for (var i = 0; i < 10; i++) {
 	logOp.addDependency(uselessOp);
 }
 logOp.onCompletion(done);
+myQueue.addOperation(logOp);
 myQueue.start();
 ```

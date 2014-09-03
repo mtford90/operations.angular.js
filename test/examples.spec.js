@@ -3,6 +3,7 @@ var assert = chai.assert;
 describe('examples', function () {
     var Operation, OperationQueue;
 
+    this.timeout(3000);
 
     beforeEach(function () {
         module('myModule');
@@ -21,6 +22,7 @@ describe('examples', function () {
                 logOp.addDependency(uselessOp);
             }
             logOp.onCompletion(done);
+            myQueue.addOperation(logOp);
             myQueue.start();
         });
     })
