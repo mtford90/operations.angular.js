@@ -9,6 +9,7 @@ angular.module('test', [])
          * or asynchronous depending on
          */
         function safeApply() {
+            console.log('do');
             $rootScope.$$phase || $rootScope.$apply();
         }
 
@@ -32,8 +33,10 @@ angular.module('test', [])
                     },
                     set: function (c) {
                         obj['_' + property] = function () {
-                            c();
-                            safeApply();
+                            if (c) {
+                                c.apply(obj, arguments);
+                                safeApply();
+                            }
                         }
                     },
                     configurable: true,
@@ -51,8 +54,9 @@ angular.module('test', [])
             event: function (cls, property) {
                 var old = cls.prototype[property];
                 cls.prototype[property] = function (c) {
+                    var self = this;
                     old.call(this, function () {
-                        c();
+                        c.apply(self, arguments);
                         safeApply();
                     });
                 }
@@ -70,8 +74,9 @@ angular.module('test', [])
             if (!this) {
                 return new (Function.prototype.bind.apply(Operation, arguments));
             }
-            Operation.apply(this, arguments);
             wrap.callbackProperty(this, 'completion');
+            wrap.callbackProperty(this, 'work');
+            Operation.apply(this, arguments);
         }
 
         AngularOperation.prototype = Object.create(Operation.prototype);

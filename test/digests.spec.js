@@ -31,13 +31,27 @@ describe('digests', function () {
     describe('operations', function () {
         it('should digest on operation completion', function (done) {
             var op = new Operation();
-            op.completion = _assertDigestOccurs(done);
+            op.completion = function () {
+                assert.equal(this, op);
+                assertDigestOccurs(done);
+            };
             op.start();
-        });
+        }); 
 
         it('should digest on completion event', function (done) {
             var op = new Operation();
-            op.onCompletion(_assertDigestOccurs(done));
+            op.onCompletion(function () {
+                assert.equal(this, op);
+                assertDigestOccurs(done);
+            });
+            op.start();
+        });
+
+        it('should digest on work', function (done) {
+            var op = new Operation(function () {
+                assert.equal(this, op);
+                assertDigestOccurs(done);
+            });
             op.start();
         });
 
@@ -63,14 +77,20 @@ describe('digests', function () {
         });
 
         it('should digest on start', function (done) {
-            q.onStart(_assertDigestOccurs(done));
+            q.onStart(function () {
+                assert.equal(this, q);
+                assertDigestOccurs(done);
+            });
             q.start();
 
         });
 
         it('should digest on stop', function (done) {
             q.start();
-            q.onStop(_assertDigestOccurs(done));
+            q.onStop(function () {
+                assert.equal(this, q);
+                assertDigestOccurs(done);
+            });
             q.stop();
         })
     });
