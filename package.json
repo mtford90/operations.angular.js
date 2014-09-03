@@ -1,5 +1,5 @@
 {
-  "name": "operations.angular.js",
+  "name": "operations-angular",
   "version": "0.1.0",
   "description": "Management of complex chains of asynchronous operations in Javascript for angular.",
   "main": "index.js",

@@ -5,6 +5,24 @@ operations.angular.js
 
 This is a wrapper around operations.js for angular, ensuring that digests occur after callbacks.
 
+### Installation
+
+#### Bower
+
+```bash
+bower install operations-angular --save-dev
+```
+
+#### Npm
+
+```bash
+npm install operations-angular --save-dev
+```
+
+Then include `src/operations.angular.js` in your project.
+
+### Example
+
 See the original repo for documentation but here's a dumb example that shows how to get started with angular and operations:
 
 ```javascript
